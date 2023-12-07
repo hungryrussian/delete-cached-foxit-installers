@@ -12,6 +12,8 @@ foreach($folder in $rdsUsersFolders) {
     $result = Test-Path $userFoxitPath
     if($result -eq $True) {
         Get-ChildItem -Path $userFoxitPath -Recurse | Remove-Item -Force -Recurse -Whatif
+        $totalSize += (Get-ChildItem -Path $userFoxitPath).Length/1MB
         #Get-ChildItem -Path $userFoxitPath -Recurse | Remove-Item -Force -Recurse
     }
 }
+Write-Host "Total disk space used: $totalSize MB" -BackgroundColor DarkRed
